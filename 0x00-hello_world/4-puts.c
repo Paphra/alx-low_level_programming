@@ -1,7 +1,9 @@
 #include <stdio.h>
 
 /**
- * Print a single line with puts
+ * main -Entry point
+ *
+ * Return: 0 - for success
  */
 int main(void)
 {
