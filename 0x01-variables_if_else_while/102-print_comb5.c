@@ -20,18 +20,17 @@ int main(void)
 			{
 				for (l = k; l < 10; l++)
 				{
-					if (i != 0 && j != 0 && k != 0 && l != 0)
+					if (k == 0)
+						l = k + 1;
+					putchar('0' + i);
+					putchar('0' + j);
+					putchar(' ');
+					putchar('0' + k);
+					putchar('0' + l);
+					if (i != 9 && j != 8)
 					{
-						putchar('0' + i);
-						putchar('0' + j);
+						putchar(',');
 						putchar(' ');
-						putchar('0' + k);
-						putchar('0' + l);
-						if (i != 9 && j != 8)
-						{
-							putchar(',');
-							putchar(' ');
-						}
 					}
 				}
 			}
