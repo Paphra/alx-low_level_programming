@@ -18,14 +18,14 @@ int main(void)
 		{
 			for (k = 0; k < 10; k++)
 			{
-				for (l = k; l < 10; l++)
+				for (l = k + 1; l < 10; l++)
 				{
 					putchar('0' + i);
 					putchar('0' + j);
 					putchar(' ');
 					putchar('0' + k);
 					putchar('0' + l);
-					if (i != 9 && j != 8 && k != 9 && l != 9)
+					if (i != 9 && j != 8)
 					{
 						putchar(',');
 						putchar(' ');
