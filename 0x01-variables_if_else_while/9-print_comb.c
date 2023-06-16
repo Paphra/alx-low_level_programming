@@ -7,18 +7,13 @@
  */
 int main(void)
 {
-	int num1;
-	int num2;
+	int number;
 
-	for (num1 = 0; num1 < 10; num1++)
+	for (number = 0; number < 10; number++)
 	{
-		for (num2 = 0; num2 < 10; num2++)
-		{
-			putchar('0' + num1);
-			putchar('0' + num2);
-			putchar(',');
-			putchar(' ');
-		}
+		putchar('0' + number);
+		putchar(',');
+		putchar(' ');
 	}
 
 	return (0);
