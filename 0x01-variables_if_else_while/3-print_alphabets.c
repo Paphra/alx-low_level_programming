@@ -1,8 +1,6 @@
 #include <stdio.h>
 
 /**
- * Print alphabets both lowercase and uppercase
- *
  * main - Entry point
  *
  * Return: always a 0
