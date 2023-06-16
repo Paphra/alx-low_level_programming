@@ -13,8 +13,10 @@ int main(void)
 	{
 		putchar('0' + number);
 		if (number < 9)
+		{
 			putchar(',');
 			putchar(' ');
+		}
 	}
 
 	return (0);
