@@ -32,7 +32,7 @@ int main(void)
 			if (i != 98)
 			{
 				putchar(',');
-				puchar(' ');
+				putchar(' ');
 			}
 		}
 
