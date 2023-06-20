@@ -9,7 +9,7 @@
  */
 int main(void)
 {
-	long long seq[50];
+	long seq[50];
 	int i, j;
 
 	seq[0] = 1;
@@ -20,7 +20,7 @@ int main(void)
 
 	for (j = 0; j < 50; j++)
 	{
-		printf("%lld", seq[j]);
+		printf("%ld", seq[j]);
 		if (j < 49)
 			printf(", ");
 	}
