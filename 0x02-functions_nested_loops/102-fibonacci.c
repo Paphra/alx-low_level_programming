@@ -10,16 +10,13 @@
 int main(void)
 {
 	int list[50];
+	int i, j;
 
 	list[0] = 1;
 	list[1] = 2;
 
-	int i;
-
 	for (i = 2; i < 50; i++)
 		list[i] = list[i - 1] + list[i - 2];
-
-	int j;
 
 	for (j = 0; j < 50; j++)
 	{
