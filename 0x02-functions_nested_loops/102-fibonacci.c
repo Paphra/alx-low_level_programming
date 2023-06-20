@@ -9,18 +9,18 @@
  */
 int main(void)
 {
-	int list[50];
+	long long seq[50];
 	int i, j;
 
-	list[0] = 1;
-	list[1] = 2;
+	seq[0] = 1;
+	seq[1] = 2;
 
 	for (i = 2; i < 50; i++)
-		list[i] = list[i - 1] + list[i - 2];
+		seq[i] = seq[i - 1] + seq[i - 2];
 
 	for (j = 0; j < 50; j++)
 	{
-		printf("%d", list[j]);
+		printf("%lld", seq[j]);
 		if (j < 49)
 			printf(", ");
 	}
