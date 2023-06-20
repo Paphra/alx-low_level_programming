@@ -9,19 +9,23 @@
  */
 int main(void)
 {
-	int i;
+	unsigned int count;
 	unsigned long fib1, fib2;
+	unsigned int i;
 
+	count = 98;
 	fib1 = 1;
 	fib2 = 2;
+	printf("%lu, %lu, ", fib1, fib2);
 
-	for (i = 2; i < 98; i++)
+	for (i = 3; i <= count; i++)
 	{
-		printf("%lu, %lu", fib1, fib2);
-		fib1 = fib1 + fib2;
-		fib2 = fib1 + fib2;
+		unsigned long nextFib = fib1 + fib2;
+		printf("%lu", nextFib);
+		fib1 = fib2;
+		fib2 = nextFib;
 
-		if (i < 97)
+		if (i != count)
 			printf(", ");
 	}
 	printf("\n");
