@@ -3,7 +3,7 @@
 /**
  * main - prints the fibonacci sequences
  *
- * Description: The first 50 Fibonnaci numbers starting from 1 and 2
+ * Description: The first 98 Fibonnaci numbers starting from 1 and 2
  *
  * Return: 0 always success;
  */
@@ -16,6 +16,7 @@ int main(void)
 	count = 98;
 	fib1 = 1;
 	fib2 = 2;
+
 	printf("%lu, %lu, ", fib1, fib2);
 
 	for (i = 3; i <= count; i++)
@@ -28,6 +29,7 @@ int main(void)
 		if (i != count)
 			printf(", ");
 	}
+
 	printf("\n");
 	return (0);
 }
