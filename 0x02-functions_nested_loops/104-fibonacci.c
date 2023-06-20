@@ -22,7 +22,7 @@ int main(void)
 	for (i = 3; i <= count; i++)
 	{
 		unsigned long nextFib = fib1 + fib2;
-		
+
 		printf("%lu", nextFib);
 		fib1 = fib2;
 		fib2 = nextFib;
