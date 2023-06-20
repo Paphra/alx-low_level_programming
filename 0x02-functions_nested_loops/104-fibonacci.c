@@ -10,14 +10,14 @@
 int main(void)
 {
 	int i;
-	unsigned int fib1, fib2;
+	unsigned long fib1, fib2;
 
 	fib1 = 1;
 	fib2 = 2;
 
 	for (i = 2; i < 98; i++)
 	{
-		printf("%u, %u", fib1, fib2);
+		printf("%lu, %lu", fib1, fib2);
 		fib1 = fib1 + fib2;
 		fib2 = fib1 + fib2;
 
