@@ -20,7 +20,7 @@ int main(void)
 			number = number / prime;
 		}
 	}
-	
+
 	printf("%lu\n", large);
 
 	return (0);
