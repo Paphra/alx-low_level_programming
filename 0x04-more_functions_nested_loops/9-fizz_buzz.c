@@ -2,7 +2,7 @@
 
 /**
  * main - print 1 to 100, FizzBuzz programm
- * Description: 
+ * Description:
  * - for the multiples of 3 - Fizz
  * - for the multiples of 5 - Buzz
  * - for multiples of both 3 and 5 - FizzBuzz
