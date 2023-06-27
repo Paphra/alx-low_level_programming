@@ -8,8 +8,6 @@
  */
 int main(void)
 {
-	srand(time(NULL));
-
 	int i;
 	int idx;
 	char pass[11];
@@ -18,6 +16,8 @@ int main(void)
 	const char alphan[] = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
 
 	num = sizeof(alphan) - 1;
+
+	srand(time(NULL));
 
 	for (i = 0; i < 10; i++)
 	{
