@@ -10,7 +10,8 @@ int main(void)
 {
 	srand(time(NULL));
 
-	int i, idx;
+	int i;
+	int idx;
 	char pass[11];
 	int num;
 
