@@ -1,0 +1,27 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
+
+/**
+ * main - entry point to random password generator
+ * Return: 0 - success
+ */
+int main(void)
+{
+	srand(time(NULL));
+
+	char alphan[] = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+	int num = sizeof(alphan) - 1;
+	int i, idx;
+	char pass[11];
+
+	for (i = 0; i < 10; i++)
+	{
+		idx = rand() % num;
+		pass[i] = alphan[idx];
+	}
+	pass[10] = '\0';
+	printf("%s", pass);
+
+	return (0);
+}
