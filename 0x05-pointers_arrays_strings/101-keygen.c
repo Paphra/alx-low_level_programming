@@ -10,10 +10,12 @@ int main(void)
 {
 	srand(time(NULL));
 
-	char alphan[] = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
-	int num = sizeof(alphan) - 1;
 	int i, idx;
 	char pass[11];
+	int num;
+
+	const char alphan[] = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+	num = sizeof(alphan) - 1;
 
 	for (i = 0; i < 10; i++)
 	{
