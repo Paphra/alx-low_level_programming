@@ -10,7 +10,7 @@ char *string_toupper(char *str)
 	char *_str = str;
 	char upper[] = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 	char lower[] = "abcdefghijklmnopqrstuvwxyz";
-	int i, j;
+	int i;
 
 	while (*str != '\0')
 	{
@@ -18,11 +18,8 @@ char *string_toupper(char *str)
 		{
 			for (i = 0; i < 26; i++)
 			{
-				for (j = 0; j < 26; j++)
-				{
-					if (i == j && *str == lower[i])
-						*str = upper[j];
-				}
+				if (*str == lower[i])
+					*str = upper[i];
 			}
 		}
 		str++;
