@@ -9,16 +9,19 @@ void print_number(int n)
 {
 	int div;
 	int digit;
+	int neg = 0;
 
 	div = 1;
 
 	if (n < 0)
 	{
-		_putchar('-');
+		neg = 1;
 		n = -n;
 	}
 	while (n / div >= 10)
 		div *= 10;
+	if (neg)
+		_putchar(45);
 	while (div > 0)
 	{
 		digit = n / div;
