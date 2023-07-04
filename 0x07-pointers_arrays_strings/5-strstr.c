@@ -24,8 +24,8 @@ char *_strstr(char *haystack, char *needle)
 			_nee++;
 		}
 		if (*_nee == '\0')
-			break;
+			return (haystack);
 		haystack++;
 	}
-	return (haystack);
+	return (0);
 }
