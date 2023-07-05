@@ -1,7 +1,7 @@
 #include "main.h"
 
 /**
- * i_div - check whether a nmber is divisible by another
+ * is_div - check whether a nmber is divisible by another
  * @n: the number
  * @div: divisor
  * Return: 1 if true, else 0
@@ -12,7 +12,7 @@ int is_div(int n, int div)
 		return (0);
 	if (n % div == 0)
 		return (1);
-	return is_div(n, div - 1);
+	return (is_div(n, div - 1));
 }
 
 /**
