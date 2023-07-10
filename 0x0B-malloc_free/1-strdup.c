@@ -11,8 +11,10 @@
 char *_strdup(char *str)
 {
 	unsigned int len, i;
-	char *cp = str;
 	char *_strcp;
+	char *cp = str;
+
+	len = 0;
 
 	if (str == NULL)
 		return (NULL);
