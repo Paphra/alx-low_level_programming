@@ -10,12 +10,19 @@
  */
 char *_strdup(char *str)
 {
-	unsigned int i;
+	unsigned int len, i;
+	char *cp = str;
 	char *_strcp;
 
 	if (str == NULL)
 		return (NULL);
-	_strcp = malloc(sizeof(char) * sizeof(str));
+	while (*cp != '\0')
+	{
+		len++;
+		cp++;
+	}
+
+	_strcp = malloc(sizeof(char) * len);
 
 	if (_strcp != NULL)
 	{
