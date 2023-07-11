@@ -1,6 +1,11 @@
 #include "main.h"
 #include <stdlib.h>
 
+/**
+ * _strlen - get the string length
+ * @s: the string
+ * Return: the string length
+ */
 int _strlen(char *s)
 {
 	int len = 0;
@@ -33,6 +38,7 @@ char *argstostr(int ac, char **av)
 	{
 		len += _strlen(av[i]);
 	}
+	len++;
 
 	str = malloc(sizeof(char) * len);
 	if (str == NULL)
