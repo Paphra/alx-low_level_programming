@@ -15,7 +15,7 @@ int _strlen(char *s)
 	{
 		len++;
 		_sp++;
-		
+
 	}
 	return (len);
 }
@@ -29,7 +29,7 @@ int _strlen(char *s)
 char **strtow(char *str)
 {
 	char **arr;
-	int i, j;
+	int i, j, w;
 	int slen = 0;
 	int wlen = 0;
 	int wstart = 0;
@@ -38,19 +38,16 @@ char **strtow(char *str)
 	if (str == NULL || *str == '\0')
 		return (NULL);
 	slen = _strlen(str);
-
 	arr = (char **)malloc(sizeof(char *) * slen);
 	if (arr == NULL)
 		return (NULL);
-
 	for (i = 0; i < slen; i++)
 	{
 		if (str[i] == ' ' || str[i] == '\0')
 		{
 			if (wlen > 0)
 			{
-				int w = wlen + 1;
-
+				w = wlen + 1;
 				arr[wcount] = (char *)malloc(sizeof(char) * w);
 				if (arr[wcount] == NULL)
 				{
@@ -59,11 +56,9 @@ char **strtow(char *str)
 					free(arr);
 					return (NULL);
 				}
-			
 				for (j = 0; j < wlen; j++)
 					arr[wcount][j] = str[wstart + j];
 				arr[wcount][j] = '\0';
-
 				wcount++;
 				wlen = 0;
 			}
