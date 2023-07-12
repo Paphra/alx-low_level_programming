@@ -2,43 +2,22 @@
 #include <stdlib.h>
 
 /**
- * _wcount - word count
- * @s: the string to count words
- * Return: word count
- */
-int _wcount(char *s)
-{
-	int count = 0;
-	char prev;
-
-	do {
-		if (*s == ' ' && prev != ' ')
-			count++;
-		prev = *s;
-		s++;
-	} while (*s != '\0');
-	count++;
-
-	return (count);
-}
-
-/**
- * _ccount - char count
+ * _strlen - char count
  * @s: string to count chars
- * @count: current count
  * Return: the char count
  */
-int _ccount(char *s, int count)
+int _strlen(char *s)
 {
-	if (*s == ' ' && count > 0)
+	int len = 0;
+	char *_sp = s;
+
+	while (*_sp)
 	{
-		return (count);
+		len++;
+		_sp++;
+		
 	}
-	if (*s == '\0')
-		return (count);
-	s++;
-	count++;
-	return (_ccount(s, count));
+	return (len);
 }
 
 /**
@@ -51,35 +30,47 @@ char **strtow(char *str)
 {
 	char **arr;
 	int i, j;
-	int words = 0;
-	int chars = 0;
+	int slen = 0;
+	int wlen = 0;
+	int wstart = 0;
+	int wcount = 0;
 
 	if (str == NULL || *str == '\0')
 		return (NULL);
-	words = _wcount(str);
+	slen = _strlen(str);
 
-	arr = (char **)malloc(sizeof(char *) * words);
+	arr = (char **)malloc(sizeof(char *) * slen);
 	if (arr == NULL)
 		return (NULL);
 
-	for (i = 0; i < words; i++)
+	for (i = 0; i < slen; i++)
 	{
-		chars = _ccount(str, 0);
-		arr[i] = (char *)malloc(sizeof(char) * chars);
-		if (arr[i] == NULL)
+		if (str[i] == ' ' || str[i] == '\0')
 		{
-			return (NULL);
-		}
+			if (wlen > 0)
+			{
+				int w = wlen + 1;
 
-		j = 0;
+				arr[wcount] = (char *)malloc(sizeof(char) * w);
+				if (arr[wcount] == NULL)
+				{
+					for (j = 0; j < wcount; j++)
+						free(arr[j]);
+					free(arr);
+					return (NULL);
+				}
+			
+				for (j = 0; j < wlen; j++)
+					arr[wcount][j] = str[wstart + j];
+				arr[wcount][j] = '\0';
 
-		while (*str != ' ' || *str != '\0')
-		{
-			arr[i][j] = *str;
-			str++;
-			j++;
-		}
+				wcount++;
+				wlen = 0;
+			}
+			wstart = i + 1;
+		} else
+			wlen++;
 	}
-
+	arr[wcount] = NULL;
 	return (arr);
 }
