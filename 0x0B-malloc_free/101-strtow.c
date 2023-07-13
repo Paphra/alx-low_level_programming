@@ -13,7 +13,7 @@ int _slen(char *s, int spc __attribute__((unused)))
 	int len = 0;
 	char *_sp = s;
 
-	while (*_sp)
+	while (*_sp != '\0')
 	{
 		if (_prev == 0)
 		{
@@ -30,6 +30,7 @@ int _slen(char *s, int spc __attribute__((unused)))
 		_sp++;
 		len++;
 	}
+	len++;
 	return (len);
 }
 
