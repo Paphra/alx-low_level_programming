@@ -40,20 +40,17 @@ char *string_nconcat(char *s1, char *s2, unsigned int n)
 	ln2 = _sln(s2cp);
 	ttln = ln1;
 	if (n >= ln2)
-		ttln += ln2;
-	else
-	{
-		ttln += n;
-	}
+		n = ln2;
+	ttln = ln1 + n + 1;
 
-	ptr = malloc(sizeof(char) * ttln);
+	ptr = (char *)malloc(sizeof(char) * ttln);
 	if (ptr == NULL)
 		return (NULL);
 	for (i = 0; i < ln1; i++)
 		ptr[i] = s1[i];
-	for (j = ln1; j < ttln; j++)
-		ptr[j] = s2[j - ln1];
-	ptr[j] = '\0';
+	for (j = 0; j < n; j++)
+		ptr[i + j] = s2[j];
+	ptr[i + j] = '\0';
 
 	return (ptr);
 }
