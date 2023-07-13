@@ -11,7 +11,7 @@ int _sln(char *s)
 	int ln = 0;
 
 	if (s == NULL || *s == '\0')
-		return (1);
+		return (0);
 	while (*s != '\0')
 	{
 		ln++;
