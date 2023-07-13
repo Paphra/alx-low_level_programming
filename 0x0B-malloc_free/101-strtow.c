@@ -2,20 +2,33 @@
 #include <stdlib.h>
 
 /**
- * _strlen - char count
+ * _slen - char count
  * @s: string to count chars
+ * @spc:whther to count spaces or not
  * Return: the char count
  */
-int _strlen(char *s)
+int _slen(char *s, int spc __attribute__((unused)))
 {
+	char _prev __attribute__((unused));
 	int len = 0;
 	char *_sp = s;
 
 	while (*_sp)
 	{
-		len++;
+		if (_prev == 0)
+		{
+			len++;
+			_sp++;
+			continue;
+		}
+		if (_prev == ' ' && *_sp == ' ')
+		{
+			_sp++;
+			continue;
+		}
+		_prev = *_sp;
 		_sp++;
-
+		len++;
 	}
 	return (len);
 }
@@ -30,18 +43,19 @@ char **strtow(char *str)
 {
 	char **arr;
 	int i, j, w;
-	int slen = 0;
-	int wlen = 0;
-	int wstart = 0;
-	int wcount = 0;
+	int strl = 0, _strl = 0;
+	int wlen = 0, wstart = 0, wcount = 0;
 
 	if (str == NULL || *str == '\0')
 		return (NULL);
-	slen = _strlen(str);
-	arr = (char **)malloc(sizeof(char *) * slen);
+	strl = _slen(str, 0);
+	_strl = _slen(str, 1);
+	if (_strl < 3)
+		return (NULL);
+	arr = (char **)malloc(sizeof(char *) * _strl);
 	if (arr == NULL)
 		return (NULL);
-	for (i = 0; i < slen; i++)
+	for (i = 0; i < strl; i++)
 	{
 		if (str[i] == ' ' || str[i] == '\0')
 		{
