@@ -35,6 +35,36 @@ int _slen(char *s, int spc __attribute__((unused)))
 }
 
 /**
+ * _wc - word count
+ * @s: the string
+ * Return: word count
+ */
+int _wc(char *s)
+{
+	char _p;
+	int wc = 0;
+	char *_s = s;
+
+	while (*_s != '\0')
+	{
+		if (_p == ' ' && *_s == ' ')
+		{
+			_s++;
+			continue;
+		}
+		if (*_s == ' ')
+		{
+			wc++;
+		}
+		_p = *_s;
+		_s++;
+	}
+	if (_p != ' ')
+		wc++;
+	return (wc);
+}
+
+/**
  * strtow - splits a string into words
  * @str: pointer to the string
  *
@@ -44,16 +74,16 @@ char **strtow(char *str)
 {
 	char **arr;
 	int i, j, w;
-	int strl = 0, _strl = 0;
-	int wlen = 0, wstart = 0, wcount = 0;
+	int strl = 0, _strl = 0, wlen = 0, wstart = 0, wcount = 0, wc = 0;
 
 	if (str == NULL || *str == '\0')
 		return (NULL);
 	strl = _slen(str, 0);
 	_strl = _slen(str, 1);
+	wc = _wc(str);
 	if (_strl < 3)
 		return (NULL);
-	arr = (char **)malloc(sizeof(char *) * _strl);
+	arr = (char **)malloc(sizeof(char *) * wc);
 	if (arr == NULL)
 		return (NULL);
 	for (i = 0; i < strl; i++)
