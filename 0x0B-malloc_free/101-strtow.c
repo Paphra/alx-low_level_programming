@@ -15,7 +15,7 @@ int _slen(char *s, int spc __attribute__((unused)))
 
 	while (*_sp != '\0')
 	{
-		if (_prev == 0)
+		if (spc == 0)
 		{
 			len++;
 			_sp++;
