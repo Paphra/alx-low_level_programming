@@ -89,7 +89,7 @@ char *_mul(char *s1, char *s2)
 	ls2 = _sln(s2);
 	lres = ls1 + ls2;
 
-	result = (int *) calloc(lres, sizeof(int));
+	result = (int *) malloc(lres * sizeof(int));
 	for (i = ls1 - 1; i >= 0; i--)
 	{
 		for (j = ls2 - 1; j >= 0; j--)
