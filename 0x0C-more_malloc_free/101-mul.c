@@ -13,10 +13,11 @@ int main(int argc, char **argv)
 {
 	char *prod;
 
-	if (argc != 3)
-		_error();
-	if (_digits(argv[1]) == 0 || _digits(argv[2]) == 0)
-		_error();
+	if (argc != 3 || _digits(argv[1]) == 0 || _digits(argv[2]) == 0)
+	{
+		_puts("Error\n");
+		exit(98);
+	}
 
 	prod = _mul(argv[1], argv[2]);
 
@@ -24,16 +25,6 @@ int main(int argc, char **argv)
 	_putchar('\n');
 
 	return (0);
-}
-
-/**
- * _error - print error and exit
- * Return: void;
- */
-void _error(void)
-{
-	_puts("Error\n");
-	exit(98);
 }
 
 /**
