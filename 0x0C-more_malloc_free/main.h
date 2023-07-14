@@ -11,4 +11,6 @@ void *_realloc(void *ptr, unsigned int old_size, unsigned int new_size);
 void _puts(char *);
 int _digits(char *);
 void _error(void);
+int _sln(char *);
+char *_mul(char *, char *);
 
