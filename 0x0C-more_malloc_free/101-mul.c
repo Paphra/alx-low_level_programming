@@ -44,7 +44,7 @@ void _error(void)
  */
 void _puts(char *str)
 {
-	while(*str != '\0')
+	while (*str != '\0')
 	{
 		_putchar(*str);
 		str++;
@@ -59,7 +59,7 @@ void _puts(char *str)
  */
 int _digits(char *str)
 {
-	while(*str != '\0')
+	while (*str != '\0')
 	{
 		if (*str < '0' || *str > '9')
 			return (0);
