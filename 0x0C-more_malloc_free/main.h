@@ -8,9 +8,9 @@ void *_calloc(unsigned int nmemb, unsigned int size);
 int *array_range(int min, int max);
 void *_realloc(void *ptr, unsigned int old_size, unsigned int new_size);
 
-void _puts(char *);
-int _digits(char *);
+void _puts(char *str);
+int _digits(char *str);
 void _error(void);
-int _sln(char *);
-char *_mul(char *, char *);
+int _sln(char *s);
+char *_mul(char *s1, char *s2);
 
