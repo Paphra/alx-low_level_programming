@@ -17,5 +17,9 @@ struct dog
 void init_dog(struct dog *d, char *name, float age, char *owner);
 void print_dog(struct dog *d);
 
+/**
+ * dog_t - Typedef of for struct go
+ */
+typedef struct dog dog_t;
 
 #endif /* #ifndef DOCG_H */
