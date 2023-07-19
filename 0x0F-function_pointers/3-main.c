@@ -14,7 +14,7 @@
  */
 int main(int argc, char **argv)
 {
-	int num1, num2, i;
+	int num1, num2;
 	char *op;
 	int (*op_func)(int, int);
 
