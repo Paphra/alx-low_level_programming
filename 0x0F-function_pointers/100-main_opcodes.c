@@ -25,8 +25,7 @@ int main(int argc, char *argv[])
 		printf("Error\n");
 		exit(2);
 	}
-	if (num_bytes <= 9999999999999)
-		opcodes(num_bytes);
+	opcodes(num_bytes);
 
 	return (0);
 }
