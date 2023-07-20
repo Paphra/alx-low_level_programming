@@ -25,8 +25,8 @@ int main(int argc, char *argv[])
 		printf("Error\n");
 		exit(2);
 	}
-
-	opcodes(num_bytes);
+	if (num_bytes < 9999)
+		opcodes(num_bytes);
 
 	return (0);
 }
@@ -41,7 +41,7 @@ void opcodes(int num_bytes)
 	int i;
 	unsigned char *ptr = (unsigned char *) opcodes;
 
-	for (i = 0; i < num_bytes && i <= 9999; i++)
+	for (i = 0; i < num_bytes; i++)
 	{
 		printf("%02x", ptr[i]);
 		if (i < num_bytes - 1)
