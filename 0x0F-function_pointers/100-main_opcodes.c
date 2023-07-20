@@ -24,8 +24,9 @@ int main(int argc, char *argv[])
 		printf("Error\n");
 		return (2);
 	}
-
-	opcodes(num_bytes);
+	
+	if (num_bytes > 0)
+		opcodes(num_bytes);
 
 	return (0);
 }
