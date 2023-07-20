@@ -11,11 +11,11 @@
 void print_all(const char * const format, ...)
 {
 	va_list params;
-	char 	c_arg;
-	int 	i_arg;
-	float 	f_arg;
-	char 	*s_arg;
-	int i = 0;
+	char	c_arg;
+	int	i_arg;
+	float	f_arg;
+	char	*s_arg;
+	int	i = 0;
 
 	va_start(params, format);
 	while (format[i] != '\0')
@@ -49,6 +49,5 @@ void print_all(const char * const format, ...)
 			printf(", ");
 		i++;
 	}
-
 	printf("\n");
 }
