@@ -41,7 +41,7 @@ void opcodes(int num_bytes)
 	int i;
 	unsigned char *ptr = (unsigned char *) opcodes;
 
-	for (i = 0; i < num_bytes; i++)
+	for (i = 0; i < num_bytes && i <= 9999; i++)
 	{
 		printf("%02x", ptr[i]);
 		if (i < num_bytes - 1)
