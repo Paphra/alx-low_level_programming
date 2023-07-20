@@ -16,15 +16,16 @@ int main(int argc, char *argv[])
 	if (argc != 2)
 	{
 		printf("Error\n");
-		return (1);
+		exit(1);
 	}
 
 	num_bytes = atoi(argv[1]);
 	if (num_bytes < 0)
 	{
 		printf("Error\n");
-		return (2);
+		exit(2);
 	}
+
 	opcodes(num_bytes);
 
 	return (0);
@@ -40,7 +41,7 @@ void opcodes(int num_bytes)
 	int i;
 	unsigned char *ptr = (unsigned char *) opcodes;
 
-	for (i = 0; i < num_bytes; i++)
+	for (i = 0; i < num_bytes && num_bytes <= 9999; i++)
 	{
 		printf("%02x", ptr[i]);
 		if (i < num_bytes - 1)
