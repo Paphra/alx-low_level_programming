@@ -18,15 +18,15 @@ int main(int argc, char *argv[])
 		printf("Error\n");
 		return (1);
 	}
+
 	num_bytes = atoi(argv[1]);
 	if (num_bytes < 0)
 	{
 		printf("Error\n");
 		return (2);
 	}
-	
-	if (num_bytes > 0)
-		opcodes(num_bytes);
+
+	opcodes(num_bytes);
 
 	return (0);
 }
