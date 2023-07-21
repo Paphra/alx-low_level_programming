@@ -24,12 +24,13 @@ void print_all(const char * const format, ...)
 {
 	va_list params;
 	char	*s_arg;
-	int	i = 0, flag = 0;
+	const char *_f = format;
+	int	flag = 0;
 
 	va_start(params, format);
-	while (format[i] != '\0')
+	while (*_f != '\0')
 	{
-		switch (format[i])
+		switch (*_f)
 		{
 			case 'c':
 				_psep(&flag);
@@ -57,7 +58,7 @@ void print_all(const char * const format, ...)
 				flag = 0;
 				break;
 		}
-		i++;
+		_f++;
 	}
 	va_end(params);
 	printf("\n");
