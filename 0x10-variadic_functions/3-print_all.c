@@ -4,6 +4,18 @@
 #include <stdarg.h>
 
 /**
+ * _psep - print separator
+ * @flag: flag of 1 or 0
+ * Return: nothing
+ */
+void _psep(int *flag)
+{
+	if (*flag == 1)
+		printf(", ");
+	*flag = 1;
+}
+
+/**
  * print_all - pritns anything
  * @format: the format of the args types
  * Return: nothing
@@ -11,11 +23,8 @@
 void print_all(const char * const format, ...)
 {
 	va_list params;
-	char	c_arg;
-	int	i_arg;
-	float	f_arg;
 	char	*s_arg;
-	int	i = 0;
+	int	i = 0, flag = 0;
 
 	va_start(params, format);
 	while (format[i] != '\0')
@@ -23,30 +32,31 @@ void print_all(const char * const format, ...)
 		switch (format[i])
 		{
 			case 'c':
-				c_arg = (char)va_arg(params, int);
-				printf("%c", c_arg);
+				_psep(&flag);
+				printf("%c", (char)va_arg(params, int));
 				break;
 			case 'i':
-				i_arg = va_arg(params, int);
-				printf("%d", i_arg);
+				_psep(&flag);
+				printf("%d", va_arg(params, int));
 				break;
 			case 'f':
-				f_arg = (float)va_arg(params, double);
-				printf("%f", f_arg);
+				_psep(&flag);
+				printf("%f", (float)va_arg(params, double));
 				break;
 			case 's':
+				_psep(&flag);
 				s_arg = va_arg(params, char*);
 				if (s_arg == NULL)
+				{
 					printf("(nil)");
-				else
-					printf("%s", s_arg);
+					break;
+				}
+				printf("%s", s_arg);
 				break;
 			default:
-				i++;
-				continue;
+				flag = 0;
+				break;
 		}
-		if (format[i + 1] != '\0')
-			printf(", ");
 		i++;
 	}
 	va_end(params);
