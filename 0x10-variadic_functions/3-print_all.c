@@ -28,7 +28,7 @@ void print_all(const char * const format, ...)
 	int	flag = 0;
 
 	va_start(params, format);
-	while (*_f != '\0')
+	while (format != NULL && *_f != '\0')
 	{
 		switch (*_f)
 		{
