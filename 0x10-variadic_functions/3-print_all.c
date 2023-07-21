@@ -6,13 +6,13 @@
 /**
  * _psep - print separator
  * @flag: flag of 1 or 0
- * Return: nothing
+ * Return: return int
  */
-void _psep(int *flag)
+int _psep(int flag)
 {
-	if (*flag == 1)
+	if (flag == 1)
 		printf(", ");
-	*flag = 1;
+	return (1);
 }
 
 /**
@@ -33,19 +33,19 @@ void print_all(const char * const format, ...)
 		switch (*_f)
 		{
 			case 'c':
-				_psep(&flag);
+				flag = _psep(flag);
 				printf("%c", (char)va_arg(params, int));
 				break;
 			case 'i':
-				_psep(&flag);
+				flag = _psep(flag);
 				printf("%d", va_arg(params, int));
 				break;
 			case 'f':
-				_psep(&flag);
+				flag = _psep(flag);
 				printf("%f", (float)va_arg(params, double));
 				break;
 			case 's':
-				_psep(&flag);
+				flag = _psep(flag);
 				s_arg = va_arg(params, char*);
 				if (s_arg == NULL)
 				{
@@ -55,7 +55,6 @@ void print_all(const char * const format, ...)
 				printf("%s", s_arg);
 				break;
 			default:
-				flag = 0;
 				break;
 		}
 		_f++;
