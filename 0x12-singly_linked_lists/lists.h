@@ -20,5 +20,7 @@ typedef struct list_s
 /* prototypes */
 
 size_t print_list(const list_t *h);
+size_t list_len(const list_t *h);
+
 
 #endif /* #ifndef LISTS_H */
