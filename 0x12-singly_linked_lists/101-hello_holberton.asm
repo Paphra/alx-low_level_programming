@@ -1,18 +1,13 @@
-section .data
-	hello db 'Hello, Holberton', 0
-
-section .text
-	global main
-	extern printf
+global main
+extern printf
 
 main:
-	mov rdi, hello
-	xor rax, rax
+	mov edi, hello
+	xor eax, eax
 
 	call printf
 
-	xor edi, edi
+	mov eax, 0
+	ret
 
-	mov eax, 60
-	syscall
-
+hello: db 'Hello, Holberton', 10, 0
