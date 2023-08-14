@@ -76,7 +76,7 @@ void print_os_abi2(uc abi)
 		printf("Standalone (embedded) application\n");
 		break;
 	default:
-		printf("Unknown: %u\n", abi);
+		printf("\n");
 		break;
 	}
 }
