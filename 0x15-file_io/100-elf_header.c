@@ -161,7 +161,7 @@ void print_abi_version_type_entry(Elf64_Ehdr h)
 		printf("UNKNOWN: %u\n", h.e_type);
 		break;
 	}
-	printf("  Entry point address:               0x%.8lx\n", (uintptr_t)h.e_entry & 0xFFFFFFFF);
+	printf("  Entry point address:               0x%.8lx\n", (uintptr_t)h.e_entry);
 }
 
 /**
