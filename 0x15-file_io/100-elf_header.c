@@ -122,14 +122,12 @@ void print_os_abi(unsigned char osabi)
 }
 
 /**
- * print_abi_version_type_entry - prints the abi version, type and entry
+ * print_abi_version_type - prints the abi version, type and entry
  * @h: the header
  * Return:nothing
  */
-void print_abi_version_type_entry(Elf64_Ehdr h)
+void print_abi_version_type(Elf64_Ehdr h)
 {
-	uintptr_t entry = (uintptr_t)h.e_entry;
-
 	printf("  ABI Version:                       %u\n", h.e_ident[EI_ABIVERSION]);
 
 	printf("  Type:                              ");
@@ -163,7 +161,31 @@ void print_abi_version_type_entry(Elf64_Ehdr h)
 		printf("UNKNOWN: %u\n", h.e_type);
 		break;
 	}
-	printf("  Entry point address:               0x%lx\n", entry);
+}
+
+/**
+ * print_entry - prints the entry
+ * @h: the header file
+ * @fd: file descriptor
+ * Return: nothing
+ */
+void print_entry(Elf64_Ehdr h, int fd)
+{
+	Elf32_Ehdr h32;
+
+	printf("  Entry point address:               0x");
+	if (h.e_ident[EI_CLASS] == ELFCLASS32)
+	{
+		lseek(fd, 0, SEEK_SET);
+		if (read(fd, &h32, sizeof(h32)) != sizeof(h32))
+		{
+			perror("Error reading 32-bit ELF header");
+			close(fd);
+			exit(98);
+		}
+		printf("%x\n", h32.e_entry);
+	} else
+		printf("%lx\n", h.e_entry);
 }
 
 /**
@@ -205,7 +227,8 @@ int main(int argc, char *argv[])
 
 	print_magic_class_data_version(header);
 	print_os_abi(header.e_ident[EI_OSABI]);
-	print_abi_version_type_entry(header);
+	print_abi_version_type(header);
+	print_entry(header, fd);
 
 	close(fd);
 	return (0);
