@@ -1,4 +1,4 @@
-lude <stdio.h>
+#include <stdio.h>
 #include <stdlib.h>
 #include <fcntl.h>
 #include <unistd.h>
@@ -13,8 +13,10 @@ lude <stdio.h>
  */
 void print_magic(unsigned char *e_ident)
 {
+	int i;
+
 	printf("Magic:   ");
-	for (int i = 0; i < EI_NIDENT; i++)
+	for (i = 0; i < EI_NIDENT; i++)
 		printf("%02x ", e_ident[i]);
 	printf("\n");
 }

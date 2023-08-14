@@ -6,8 +6,6 @@
 #include <string.h>
 #include <stdint.h>
 
-#define EI_NIDENT 16
-
 /* Function Prototypes */
 
 int _putchar(char c);
