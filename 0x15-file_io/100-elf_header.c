@@ -3,20 +3,33 @@
 #include "main.h"
 
 /**
- * print_magic_class_data_version - prints the magic, class, data and version
- * @h: the header
+ * print_magic - prints the magic
+ * @e_ident: the identity
  * Return: nothing
  */
-void print_magic_class_data_version(Elf64_Ehdr h)
+void print_magic(uc *e_ident)
 {
 	int i;
 
 	printf("  Magic:   ");
 	for (i = 0; i < EI_NIDENT; i++)
-		printf("%02x ", h.e_ident[i]);
+	{
+		printf("%02x", e_ident[i]);
+		if (i < EI_NIDENT - 1)
+			printf(" ");
+	}
 	printf("\n");
-	printf("  Class:                             ");
-	switch (h.e_ident[EI_CLASS])
+}
+
+/**
+ * print_class - prints a class
+ * @class: the class
+ * Return: nothing
+ */
+void print_class(uc class)
+{
+	printf("  Class:			     ");
+	switch (class)
 	{
 	case ELFCLASS32:
 		printf("ELF32\n");
@@ -28,8 +41,17 @@ void print_magic_class_data_version(Elf64_Ehdr h)
 		printf("Unknown\n");
 		break;
 	}
-	printf("  Data:                              ");
-	switch (h.e_ident[EI_DATA])
+}
+
+/**
+ * print_data - prints the data
+ * @data: the data
+ * Return: nothing
+ */
+void print_data(uc data)
+{
+	printf("  Data:				     ");
+	switch (data)
 	{
 	case ELFDATA2LSB:
 		printf("2's complement, little endian\n");
@@ -41,11 +63,20 @@ void print_magic_class_data_version(Elf64_Ehdr h)
 		printf("Unknown data format\n");
 		break;
 	}
-	printf("  Version:                           ");
-	if (h.e_ident[EI_VERSION] == EV_CURRENT)
+}
+
+/**
+ * print_version - prints version
+ * @version: the version
+ * Return: nothing
+ */
+void print_version(uc version)
+{
+	printf("  Version:			     ");
+	if (version == EV_CURRENT)
 		printf("1 (current)\n");
 	else
-		printf("%u\n", h.e_ident[EI_VERSION]);
+		printf("%u\n", version);
 }
 
 /**
@@ -86,9 +117,9 @@ void print_os_abi2(uc abi)
  * @osabi: char for OS ABI
  * Return: nothing
  */
-void print_os_abi(unsigned char osabi)
+void print_os_abi(uc osabi)
 {
-	printf("  OS/ABI:                            ");
+	printf("  OS/ABI:			     ");
 	switch (osabi)
 	{
 	case ELFOSABI_SYSV:
@@ -122,16 +153,24 @@ void print_os_abi(unsigned char osabi)
 }
 
 /**
- * print_abi_version_type - prints the abi version, type and entry
- * @h: the header
+ * print_abi_version - prints the abi version
+ * @abi_version: version
  * Return:nothing
  */
-void print_abi_version_type(Elf64_Ehdr h)
+void print_abi_version(uc abi_version)
 {
-	printf("  ABI Version:                       %u\n", h.e_ident[EI_ABIVERSION]);
+	printf("  ABI Version:			     %u\n", abi_version);
+}
 
-	printf("  Type:                              ");
-	switch (h.e_type)
+/**
+ * print_type - prints type
+ * @type: the type
+ * Return: nothing
+ */
+void print_type(uint16_t type)
+{
+	printf("  Type:				     ");
+	switch (type)
 	{
 	case ET_EXEC:
 		printf("EXEC (Executable file)\n");
@@ -158,34 +197,58 @@ void print_abi_version_type(Elf64_Ehdr h)
 		printf("Processor-specific range end\n");
 		break;
 	default:
-		printf("UNKNOWN: %u\n", h.e_type);
+		printf("<unknown: %u>\n", type);
 		break;
 	}
 }
 
 /**
  * print_entry - prints the entry
- * @h: the header file
- * @fd: file descriptor
+ * @h64: the header file for 64
+ * @h32: the header file for 32
+ * @class: the class
  * Return: nothing
  */
-void print_entry(Elf64_Ehdr h, int fd)
+void print_entry(Elf64_Ehdr h64, Elf32_Ehdr h32, uc class)
 {
-	Elf32_Ehdr h32;
-
-	printf("  Entry point address:               0x");
-	if (h.e_ident[EI_CLASS] == ELFCLASS32)
-	{
-		lseek(fd, 0, SEEK_SET);
-		if (read(fd, &h32, sizeof(h32)) != sizeof(h32))
-		{
-			perror("Error reading 32-bit ELF header");
-			close(fd);
-			exit(98);
-		}
+	printf("  Entry point address:		     0x");
+	if (class == ELFCLASS32)
 		printf("%x\n", h32.e_entry);
+	else
+		printf("%lx\n", h64.e_entry);
+}
+
+/**
+ * print_all - print all things
+ * @h64: header for 64-bit
+ * @h32: header for 32-bit
+ * Return: nothing
+ */
+void print_all(Elf64_Ehdr h64, Elf32_Ehdr h32)
+{
+	uc cls = h64.e_ident[EI_CLASS];
+
+	if (cls == ELFCLASS32)
+	{
+		print_magic(h32.e_ident);
+		print_class(h32.e_ident[EI_CLASS]);
+		print_data(h32.e_ident[EI_DATA]);
+		print_version(h32.e_ident[EI_VERSION]);
+		print_os_abi(h32.e_ident[EI_OSABI]);
+		print_abi_version(h32.e_ident[EI_ABIVERSION]);
+		print_type(h32.e_type);
+		print_entry(h64, h32, cls);
 	} else
-		printf("%lx\n", h.e_entry);
+	{
+		print_magic(h64.e_ident);
+		print_class(h64.e_ident[EI_CLASS]);
+		print_data(h64.e_ident[EI_DATA]);
+		print_version(h64.e_ident[EI_VERSION]);
+		print_os_abi(h64.e_ident[EI_OSABI]);
+		print_abi_version(h64.e_ident[EI_ABIVERSION]);
+		print_type(h64.e_type);
+		print_entry(h64, h32, cls);
+	}
 }
 
 /**
@@ -198,7 +261,8 @@ void print_entry(Elf64_Ehdr h, int fd)
 int main(int argc, char *argv[])
 {
 	int fd;
-	Elf64_Ehdr header;
+	Elf64_Ehdr h64;
+	Elf32_Ehdr h32;
 
 	if (argc != 2)
 	{
@@ -211,25 +275,27 @@ int main(int argc, char *argv[])
 		perror("Error opening file");
 		exit(98);
 	}
-	if (read(fd, &header, sizeof(header)) != sizeof(header))
+	if (read(fd, &h64, sizeof(h64)) != sizeof(h64))
 	{
 		perror("Error reading ELF header");
 		close(fd);
 		exit(98);
 	}
-	if (strncmp((char *)header.e_ident, ELFMAG, SELFMAG) != 0)
+	lseek(fd, 0, SEEK_SET);
+	if (read(fd, &h32, sizeof(h32)) != sizeof(h32))
+	{
+		perror("Error reading 32-bit ELF header");
+		close(fd);
+		exit(98);
+	}
+	if (strncmp((char *)h64.e_ident, ELFMAG, SELFMAG) != 0)
 	{
 		fprintf(stderr, "This is not an ELF file.\n");
 		close(fd);
 		exit(98);
 	}
 	printf("ELF Header:\n");
-
-	print_magic_class_data_version(header);
-	print_os_abi(header.e_ident[EI_OSABI]);
-	print_abi_version_type(header);
-	print_entry(header, fd);
-
+	print_all(h64, h32);
 	close(fd);
 	return (0);
 }
