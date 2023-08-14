@@ -15,7 +15,7 @@ void print_magic_class_data_version(Elf64_Ehdr h)
 	for (i = 0; i < EI_NIDENT; i++)
 		printf("%02x ", h.e_ident[i]);
 	printf("\n");
-	printf("  Class:                              ");
+	printf("  Class:                             ");
 	switch (h.e_ident[EI_CLASS])
 	{
 	case ELFCLASS32:
@@ -28,7 +28,7 @@ void print_magic_class_data_version(Elf64_Ehdr h)
 		printf("Unknown\n");
 		break;
 	}
-	printf("  Data:                               ");
+	printf("  Data:                              ");
 	switch (h.e_ident[EI_DATA])
 	{
 	case ELFDATA2LSB:
@@ -41,7 +41,7 @@ void print_magic_class_data_version(Elf64_Ehdr h)
 		printf("Unknown data format\n");
 		break;
 	}
-	printf("  Version:                            ");
+	printf("  Version:                           ");
 	if (h.e_ident[EI_VERSION] == EV_CURRENT)
 		printf("1 (current)\n");
 	else
@@ -88,7 +88,7 @@ void print_os_abi2(uc abi)
  */
 void print_os_abi(unsigned char osabi)
 {
-	printf("  OS/ABI:                             ");
+	printf("  OS/ABI:                            ");
 	switch (osabi)
 	{
 	case ELFOSABI_SYSV:
@@ -128,9 +128,9 @@ void print_os_abi(unsigned char osabi)
  */
 void print_abi_version_type_entry(Elf64_Ehdr h)
 {
-	printf("  ABI Version:                        %u\n", h.e_ident[EI_ABIVERSION]);
+	printf("  ABI Version:                       %u\n", h.e_ident[EI_ABIVERSION]);
 
-	printf("  Type:                                ");
+	printf("  Type:                              ");
 	switch (h.e_type)
 	{
 	case ET_EXEC:
@@ -161,7 +161,7 @@ void print_abi_version_type_entry(Elf64_Ehdr h)
 		printf("UNKNOWN: %u\n", h.e_type);
 		break;
 	}
-	printf("  Entry point address:                0x%lx\n", h.e_entry);
+	printf("  Entry point address:               0x%lx\n", h.e_entry);
 }
 
 /**
