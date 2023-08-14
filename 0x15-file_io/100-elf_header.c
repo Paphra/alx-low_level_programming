@@ -128,6 +128,8 @@ void print_os_abi(unsigned char osabi)
  */
 void print_abi_version_type_entry(Elf64_Ehdr h)
 {
+	uintptr_t entry = (uintptr_t)h.e_entry;
+
 	printf("  ABI Version:                       %u\n", h.e_ident[EI_ABIVERSION]);
 
 	printf("  Type:                              ");
@@ -161,7 +163,7 @@ void print_abi_version_type_entry(Elf64_Ehdr h)
 		printf("UNKNOWN: %u\n", h.e_type);
 		break;
 	}
-	printf("  Entry point address:               0x%.8lx\n", (uintptr_t)h.e_entry);
+	printf("  Entry point address:               0x%.8lx\n", entry);
 }
 
 /**
