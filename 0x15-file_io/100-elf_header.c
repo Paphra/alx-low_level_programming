@@ -49,43 +49,6 @@ void print_magic_class_data_version(Elf64_Ehdr h)
 }
 
 /**
- * print_os_abi - prints the abi of the OS
- * @osabi: char for OS ABI
- * Return: nothing
- */
-void print_os_abi(unsigned char osabi)
-{
-	printf("OS/ABI:                            ");
-	switch (osabi)
-	{
-	case ELFOSABI_SYSV:
-		printf("UNIX - System V\n");
-		break;
-	case ELFOSABI_HPUX:
-		printf("UNIX - HP-UX\n");
-		break;
-	case ELFOSABI_NETBSD:
-		printf("NetBSD\n");
-		break;
-	case ELFOSABI_LINUX:
-		printf("Linux\n");
-		break;
-	case ELFOSABI_SOLARIS:
-		printf("Sun Solaris\n");
-		break;
-	case ELFOSABI_AIX:
-		printf("IBM AIX\n");
-		break;
-	case ELFOSABI_IRIX:
-		printf("SGI Irix\n");
-		break;
-	case ELFOSABI_FREEBSD:
-		printf("FreeBSD\n");
-		break;
-	}
-}
-
-/**
  * print_os_abi2 - prints the second half of the OS ABI
  * @abi: OS ABI
  * Return: nothing
@@ -114,6 +77,46 @@ void print_os_abi2(uc abi)
 		break;
 	default:
 		printf("Unknown: %u\n", abi);
+		break;
+	}
+}
+
+/**
+ * print_os_abi - prints the abi of the OS
+ * @osabi: char for OS ABI
+ * Return: nothing
+ */
+void print_os_abi(unsigned char osabi)
+{
+	printf("OS/ABI:                            ");
+	switch (osabi)
+	{
+	case ELFOSABI_SYSV:
+		printf("UNIX - System V\n");
+		break;
+	case ELFOSABI_HPUX:
+		printf("UNIX - HP-UX\n");
+		break;
+	case ELFOSABI_NETBSD:
+		printf("UNIX - NetBSD\n");
+		break;
+	case ELFOSABI_LINUX:
+		printf("Linux\n");
+		break;
+	case ELFOSABI_SOLARIS:
+		printf("UNIX - Solaris\n");
+		break;
+	case ELFOSABI_AIX:
+		printf("IBM AIX\n");
+		break;
+	case ELFOSABI_IRIX:
+		printf("SGI Irix\n");
+		break;
+	case ELFOSABI_FREEBSD:
+		printf("FreeBSD\n");
+		break;
+	default:
+		print_os_abi2(osabi);
 		break;
 	}
 }
@@ -199,7 +202,6 @@ int main(int argc, char *argv[])
 
 	print_magic_class_data_version(header);
 	print_os_abi(header.e_ident[EI_OSABI]);
-	print_os_abi2(header.e_ident[EI_OSABI]);
 	print_abi_version_type_entry(header);
 
 	close(fd);
