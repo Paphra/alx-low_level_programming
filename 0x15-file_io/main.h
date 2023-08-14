@@ -6,6 +6,8 @@
 #include <string.h>
 #include <stdint.h>
 
+typedef unsigned char uc;
+
 /* Function Prototypes */
 
 int _putchar(char c);

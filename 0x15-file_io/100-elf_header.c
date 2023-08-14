@@ -1,11 +1,6 @@
 #include <stdio.h>
-#include <stdlib.h>
-#include <fcntl.h>
-#include <unistd.h>
-#include <string.h>
 #include <elf.h>
 #include "main.h"
-typedef unsigned char uc;
 
 /**
  * print_magic_class_data_version - prints the magic, class, data and version
@@ -18,7 +13,7 @@ void print_magic_class_data_version(Elf64_Ehdr h)
 
 	printf("Magic:   ");
 	for (i = 0; i < EI_NIDENT; i++)
-		printf("%02x ", header.e_ident[i]);
+		printf("%02x ", h.e_ident[i]);
 	printf("\n");
 	printf("Class:                             ");
 	switch (h.e_ident[EI_CLASS])
@@ -97,7 +92,7 @@ void print_os_abi(unsigned char osabi)
  */
 void print_os_abi2(uc abi)
 {
-	switch(abi)
+	switch (abi)
 	{
 	case ELFOSABI_TRU64:
 		printf("Compaq TRU64 UNIX\n");
@@ -118,23 +113,22 @@ void print_os_abi2(uc abi)
 		printf("Standalone (embedded) application\n");
 		break;
 	default:
-		printf("Unknown: %u\n", osabi);
+		printf("Unknown: %u\n", abi);
 		break;
 	}
 }
 
 /**
- * print_abi_version_type - prints the abi version and type
- * @abi_version: the version of the OS ABI
- * @type: type
+ * print_abi_version_type_entry - prints the abi version, type and entry
+ * @h: the header
  * Return:nothing
  */
-void print_abi_version_type(uc abi_version, uint16_t type)
+void print_abi_version_type_entry(Elf64_Ehdr h)
 {
-	printf("ABI Version:                       %u\n", abi_version);
+	printf("ABI Version:                       %u\n", h.e_ident[EI_ABIVERSION]);
 
 	printf("Type:                              ");
-	switch (type)
+	switch (h.e_type)
 	{
 	case ET_EXEC:
 		printf("EXEC (Executable file)\n");
@@ -161,19 +155,10 @@ void print_abi_version_type(uc abi_version, uint16_t type)
 		printf("Processor-specific range end\n");
 		break;
 	default:
-		printf("UNKNOWN: %u\n", type);
+		printf("UNKNOWN: %u\n", h.e_type);
 		break;
 	}
-}
-
-/**
- * print_entry - print the entry address
- * @entry: entry address
- * Return: nothing
- */
-void print_entry(uint64_t entry)
-{
-	printf("Entry point address:               0x%lx\n", entry);
+	printf("Entry point address:               0x%lx\n", h.e_entry);
 }
 
 /**
@@ -215,8 +200,7 @@ int main(int argc, char *argv[])
 	print_magic_class_data_version(header);
 	print_os_abi(header.e_ident[EI_OSABI]);
 	print_os_abi2(header.e_ident[EI_OSABI]);
-	print_abi_version_type(header.e_ident[EI_ABIVERSION], header.e_type);
-	print_entry(header.e_entry);
+	print_abi_version_type_entry(header);
 
 	close(fd);
 	return (0);
