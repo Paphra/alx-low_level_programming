@@ -11,7 +11,7 @@ void print_magic(uc *e_ident)
 {
 	int i;
 
-	printf("  Magic:   ");
+	printf("  Magic:  ");
 	for (i = 0; i < EI_NIDENT; i++)
 	{
 		printf("%02x", e_ident[i]);
@@ -28,7 +28,7 @@ void print_magic(uc *e_ident)
  */
 void print_class(uc class)
 {
-	printf("  Class:			     ");
+	printf("  Class:                             ");
 	switch (class)
 	{
 	case ELFCLASS32:
@@ -50,7 +50,7 @@ void print_class(uc class)
  */
 void print_data(uc data)
 {
-	printf("  Data:				     ");
+	printf("  Data:                              ");
 	switch (data)
 	{
 	case ELFDATA2LSB:
@@ -72,7 +72,7 @@ void print_data(uc data)
  */
 void print_version(uc version)
 {
-	printf("  Version:			     ");
+	printf("  Version:                           ");
 	if (version == EV_CURRENT)
 		printf("1 (current)\n");
 	else
@@ -119,7 +119,7 @@ void print_os_abi2(uc abi)
  */
 void print_os_abi(uc osabi)
 {
-	printf("  OS/ABI:			     ");
+	printf("  OS/ABI:                            ");
 	switch (osabi)
 	{
 	case ELFOSABI_SYSV:
@@ -159,7 +159,7 @@ void print_os_abi(uc osabi)
  */
 void print_abi_version(uc abi_version)
 {
-	printf("  ABI Version:			     %u\n", abi_version);
+	printf("  ABI Version:                       %u\n", abi_version);
 }
 
 /**
@@ -169,7 +169,7 @@ void print_abi_version(uc abi_version)
  */
 void print_type(uint16_t type)
 {
-	printf("  Type:				     ");
+	printf("  Type:                              ");
 	switch (type)
 	{
 	case ET_EXEC:
@@ -211,7 +211,7 @@ void print_type(uint16_t type)
  */
 void print_entry(Elf64_Ehdr h64, Elf32_Ehdr h32, uc class)
 {
-	printf("  Entry point address:		     0x");
+	printf("  Entry point address:               0x");
 	if (class == ELFCLASS32)
 		printf("%x\n", h32.e_entry);
 	else
