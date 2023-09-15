@@ -17,12 +17,19 @@ dlistint_t *add_dnodeint_end(dlistint_t **head, const int n)
 	if (new == NULL)
 		return (NULL);
 	tmp = *head;
-	while (tmp->next != NULL)
-		tmp = tmp->next;
-	new->prev = tmp;
 	new->next = NULL;
 	new->n = (int) n;
-	tmp->next = new;
+	if (tmp == NULL)
+	{
+		new->prev = NULL;
+		*head = new;
+	} else
+	{
+		while (tmp->next != NULL)
+			tmp = tmp->next;
+		tmp->next = new;
+		new->prev = tmp;
+	}
 
 	return (new);
 }
