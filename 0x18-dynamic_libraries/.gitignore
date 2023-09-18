@@ -1,5 +1,7 @@
 
 len
 *.o
-0-main.c
+*-main*
+liball.so
+
 
