@@ -9,14 +9,15 @@
  */
 int hash_table_set(hash_table_t *ht, const char *key, const char *value)
 {
-	ULI slot;
+	ULI slot, hash;
 	hash_node_t *new_node;
 
+	hash = hash_djb2((const unsigned char *)key);
 	slot = key_index((const unsigned char *)key, ht->size);
 	new_node = malloc(sizeof(hash_node_t));
 	if (new_node == NULL)
 		return (0);
-	new_node->key = strdup(key);
+	new_node->key = strdup(hash);
 	new_node->value = strdup(value);
 	new_node->next = NULL;
 
